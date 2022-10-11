@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
 
 public class SmallBallController : MonoBehaviour
@@ -54,5 +55,10 @@ public class SmallBallController : MonoBehaviour
             Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * 1000, Color.red);
             Debug.Log("Did not Hit");
         }
+    }
+
+    private void MoveToBigBall()
+    {
+        
     }
 }
