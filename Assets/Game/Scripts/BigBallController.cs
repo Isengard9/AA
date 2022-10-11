@@ -5,7 +5,30 @@ using UnityEngine;
 public class BigBallController : MonoBehaviour
 {
 
+    #region Instance
+
+    public static BigBallController instance;
+    
+    private void Awake()
+    {
+        if (instance == null)
+            instance = this;
+    }
+
+    #endregion
+
+    #region BaseStats
+
     [SerializeField] private float speed = 0;
+
+    #endregion
+
+    #region Fields
+
+    public Transform ballPosition;
+
+    #endregion
+    
     void Start()
     {
         
@@ -23,6 +46,6 @@ public class BigBallController : MonoBehaviour
 
     private void RotateTheBall()
     {
-        transform.Rotate(Vector3.forward, speed);
+        transform.Rotate(Vector3.up, speed);
     }
 }

@@ -8,7 +8,11 @@ public class SmallBallController : MonoBehaviour
 
     #region Definitions
 
+    public bool amINextBall = false;
     [SerializeField] private bool amIBallObject = false;
+
+    private Transform bigBall;
+    private Vector3 ballPosition;
 
     #endregion
 
@@ -22,6 +26,9 @@ public class SmallBallController : MonoBehaviour
     {
         if (amIBallObject)
             lineRenderer.enabled = true;
+
+        bigBall = BigBallController.instance.transform;
+        ballPosition = BigBallController.instance.ballPosition.position;
     }
 
 
@@ -31,6 +38,9 @@ public class SmallBallController : MonoBehaviour
             return;
         
         if(amIBallObject)
+            return;
+        
+        if(!amINextBall)
             return;
         
         if (Input.GetMouseButton(0))
@@ -44,21 +54,36 @@ public class SmallBallController : MonoBehaviour
     private void SendRay()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.up), out hit, Mathf.Infinity))
+        if (Physics.Raycast(transform.position, transform.TransformDirection(Vector3.forward), out hit, Mathf.Infinity))
         {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
-            Debug.Log("Did Hit" + hit.transform.name);
+            //Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * hit.distance, Color.green);
+            
+            MoveToBigBall();
+            
+            if (hit.transform.CompareTag("BigBall"))
+            {
+                //success
+            }
+            else if (hit.transform.tag.Equals("SmallBall"))
+            {
+                //fail
+            }
         }
         
-        else
-        {
-            Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.up) * 1000, Color.red);
-            Debug.Log("Did not Hit");
-        }
     }
 
     private void MoveToBigBall()
     {
+        transform.DOMove(ballPosition, 0.2f)
+            .OnComplete(() =>
+            {
+                transform.LookAt(bigBall);
+                lineRenderer.enabled = true;
+                SmallBallManager.instance.RemoveFromSmallBallList(this);
+            });
+        
+        transform.parent = bigBall;
+        amIBallObject = true;
         
     }
 }
