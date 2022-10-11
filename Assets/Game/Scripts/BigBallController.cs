@@ -14,6 +14,10 @@ public class BigBallController : MonoBehaviour
 
     void Update()
     {
+        if (GameManager.isGameEnded || !GameManager.isGameStarted)
+            return;
+        
+        
         RotateTheBall();
     }
 

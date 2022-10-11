@@ -4,14 +4,37 @@ using UnityEngine;
 
 public class SmallBallController : MonoBehaviour
 {
-    // Start is called before the first frame update
+
+    #region Definitions
+
+    [SerializeField] private bool amIBallObject = false;
+
+    #endregion
+
+    #region Tools
+
+    [SerializeField] private LineRenderer lineRenderer;
+
+    #endregion
+    
     void Start()
     {
-        
+        if (amIBallObject)
+            lineRenderer.enabled = true;
     }
 
-    // Update is called once per frame
+
     void Update()
+    {
+        if (GameManager.isGameEnded || !GameManager.isGameStarted)
+            return;
+        
+        
+    }
+    
+    
+
+    private void SetLineOnTrack()
     {
         
     }
