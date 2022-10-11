@@ -23,6 +23,12 @@ public class GameManager : MonoBehaviour
     public static bool isGameEnded = false;
 
     #endregion
+
+    #region Canvas
+
+    [SerializeField] private GameObject startPanel;
+
+    #endregion
    
     
     void Start()
@@ -35,4 +41,31 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    #region Buttons
+
+    public void StartButton()
+    {
+        isGameStarted = true;
+        isGameEnded = false;
+        startPanel.SetActive(false);
+        //GamePanel.SetActive(true);
+    }
+    /*
+    public void NextButton()
+    {
+        levelCounter += 1;
+        PlayerPrefs.SetInt("LevelId", levelCounter);
+        WinPanel.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void RestartButton()
+    {
+        LostPanel.SetActive(false);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+*/
+    #endregion
+   
 }
