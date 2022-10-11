@@ -49,6 +49,7 @@ public class GameManager : MonoBehaviour
         isGameStarted = true;
         isGameEnded = false;
         startPanel.SetActive(false);
+        BigBallController.instance.StartRotationMove();
         //GamePanel.SetActive(true);
     }
     /*
