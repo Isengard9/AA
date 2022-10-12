@@ -24,11 +24,11 @@ public class BigBallController : MonoBehaviour
     }
 
     #endregion
-
-    [SerializeField] private List<BigBallRotationModifier> rotModifiers;
-
+    
     #region BaseStats
 
+    [SerializeField] private List<BigBallRotationModifier> rotModifiers;
+    
     [SerializeField] private float speed = 0;
     [SerializeField] private float time = 0;
 
@@ -40,13 +40,18 @@ public class BigBallController : MonoBehaviour
 
     #endregion
 
+    #region LevelProcess
+
     public void SetLevel(List<BigBallRotationModifier> modifier)
     {
         rotModifiers = modifier;
     }
 
+    #endregion
 
-    void Update()
+    #region Update
+
+    private void Update()
     {
         if (GameManager.isGameEnded || !GameManager.isGameStarted)
             return;
@@ -54,6 +59,11 @@ public class BigBallController : MonoBehaviour
         
         RotateTheBall();
     }
+
+
+    #endregion
+
+    #region RotateTheBall
 
     private void RotateTheBall()
     {
@@ -90,7 +100,8 @@ public class BigBallController : MonoBehaviour
                 index = 0;
             }
         }
-
-        
     }
+
+    #endregion
+   
 }

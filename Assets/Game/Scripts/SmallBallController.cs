@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using DG.Tweening;
@@ -21,8 +22,10 @@ public class SmallBallController : MonoBehaviour
     [SerializeField] private LineRenderer lineRenderer;
 
     #endregion
-    
-    void Start()
+
+    #region Start
+
+    private void Start()
     {
         if (amIBallObject)
             lineRenderer.enabled = true;
@@ -31,8 +34,11 @@ public class SmallBallController : MonoBehaviour
         ballPosition = BigBallController.instance.ballPosition.position;
     }
 
+    #endregion
+    
+    #region Update
 
-    void Update()
+    private void Update()
     {
         if (GameManager.isGameEnded || !GameManager.isGameStarted)
             return;
@@ -48,8 +54,10 @@ public class SmallBallController : MonoBehaviour
             SendRay();
         }
     }
+
+    #endregion
     
-    
+    #region SendRay
 
     private void SendRay()
     {
@@ -64,13 +72,17 @@ public class SmallBallController : MonoBehaviour
             {
                 //success
             }
-            else if (hit.transform.tag.Equals("SmallBall"))
+            else if (hit.transform.CompareTag("SmallBall"))
             {
                 //fail
             }
         }
         
     }
+
+    #endregion
+
+    #region MoveToBigBall
 
     private void MoveToBigBall()
     {
@@ -86,4 +98,20 @@ public class SmallBallController : MonoBehaviour
         amIBallObject = true;
         
     }
+
+    #endregion
+
+    #region OnTrigger
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.transform.CompareTag("SmallBall"))
+        {
+            Debug.Log("test: small ball touch");
+            GameManager.instance.OnLevelFailed();
+        }
+    }
+
+    #endregion
+    
 }

@@ -36,17 +36,17 @@ public class SmallBallManager : MonoBehaviour
     [SerializeField] private int smallBallCount = 7;
 
     #endregion
-    
-    void Start()
+
+    #region Start
+
+    private void Start()
     {
         CreateSmallBalls();
     }
 
+    #endregion
 
-    void Update()
-    {
-        
-    }
+    #region CreateSmallBall
 
     private void CreateSmallBalls()
     {
@@ -61,6 +61,10 @@ public class SmallBallManager : MonoBehaviour
         SortTheBalls();
         SetSmallBall();
     }
+
+    #endregion
+    
+    #region Set/SortSmallBall
 
     private void SetSmallBall()
     {
@@ -90,11 +94,17 @@ public class SmallBallManager : MonoBehaviour
         return count;
     }
 
+    #endregion
+
+    #region LevelProcess
+
     public void SetSmallBallCount(int ball)
     {
         smallBallCount = ball;
     }
-
+    
+    #endregion
+    
     #region Add/Remove List
 
     private void AddToSmallBallList(SmallBallController ball)
@@ -105,11 +115,16 @@ public class SmallBallManager : MonoBehaviour
     public void RemoveFromSmallBallList(SmallBallController ball)
     {
         smallBalls.Remove(ball);
+
+        if (smallBalls.Count == 0)
+        {
+            GameManager.instance.OnLevelSuccess();
+        }
+        
         SortTheBalls();
         SetSmallBall();
     }
 
     #endregion
-
     
 }

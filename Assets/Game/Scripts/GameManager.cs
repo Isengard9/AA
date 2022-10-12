@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -27,20 +28,28 @@ public class GameManager : MonoBehaviour
     #region Canvas
 
     [SerializeField] private GameObject startPanel;
+    [SerializeField] private GameObject winPanel;
+    [SerializeField] private GameObject lostPanel;
 
     #endregion
-   
-    
-    void Start()
+
+    #region OnLevel
+
+    public void OnLevelSuccess()
     {
-        
+        winPanel.SetActive(true);
+        isGameEnded = true;
+        isGameStarted = false;
     }
 
-
-    void Update()
+    public void OnLevelFailed()
     {
-        
+        isGameEnded = true;
+        isGameStarted = false;
+        lostPanel.SetActive(true);
     }
+
+    #endregion
 
     #region Buttons
 
@@ -52,21 +61,22 @@ public class GameManager : MonoBehaviour
         BigBallController.instance.StartRotationMove();
         //GamePanel.SetActive(true);
     }
-    /*
+    
     public void NextButton()
     {
+        var levelCounter = PlayerPrefs.GetInt("LevelId", 0);
         levelCounter += 1;
         PlayerPrefs.SetInt("LevelId", levelCounter);
-        WinPanel.SetActive(false);
+        winPanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
     public void RestartButton()
     {
-        LostPanel.SetActive(false);
+        lostPanel.SetActive(false);
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
-*/
+
     #endregion
    
 }
