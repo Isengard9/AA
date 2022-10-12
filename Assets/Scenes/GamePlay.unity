@@ -711,7 +711,6 @@ GameObject:
   - component: {fileID: 588771449}
   - component: {fileID: 588771448}
   - component: {fileID: 588771447}
-  - component: {fileID: 588771452}
   - component: {fileID: 588771451}
   m_Layer: 0
   m_Name: BigBall
@@ -825,19 +824,6 @@ MonoBehaviour:
   speed: 1
   time: 0
   ballPosition: {fileID: 962833159}
---- !u!135 &588771452
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 588771446}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 0
-  serializedVersion: 2
-  m_Radius: 2
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &633987683
 GameObject:
   m_ObjectHideFlags: 0
@@ -965,6 +951,10 @@ PrefabInstance:
     - target: {fileID: 1687495533040817410, guid: 6f19839350fabff48ab5aaa8db2f65ae, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5916151375782018066, guid: 6f19839350fabff48ab5aaa8db2f65ae, type: 3}
+      propertyPath: isConnected
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5916151375782018066, guid: 6f19839350fabff48ab5aaa8db2f65ae, type: 3}
       propertyPath: amIBallObject

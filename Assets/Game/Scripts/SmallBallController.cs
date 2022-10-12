@@ -15,6 +15,8 @@ public class SmallBallController : MonoBehaviour
     private Transform bigBall;
     private Vector3 ballPosition;
 
+    public bool isConnected = false;
+
     #endregion
 
     #region Tools
@@ -92,6 +94,7 @@ public class SmallBallController : MonoBehaviour
                 transform.LookAt(bigBall);
                 lineRenderer.enabled = true;
                 SmallBallManager.instance.RemoveFromSmallBallList(this);
+                isConnected = true;
             });
         
         transform.parent = bigBall;
@@ -107,8 +110,8 @@ public class SmallBallController : MonoBehaviour
     {
         if (other.transform.CompareTag("SmallBall"))
         {
-            Debug.Log("test: small ball touch");
-            GameManager.instance.OnLevelFailed();
+            if(other.GetComponent<SmallBallController>().isConnected)
+                GameManager.instance.OnLevelFailed();
         }
     }
 
