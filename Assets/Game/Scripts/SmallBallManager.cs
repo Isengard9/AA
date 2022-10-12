@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityTemplateProjects.Systems;
 
 public class SmallBallManager : MonoBehaviour
 {
@@ -31,6 +32,9 @@ public class SmallBallManager : MonoBehaviour
     [SerializeField] private GameObject smallBall;
     [SerializeField] private GameObject smallBallPrefab;
 
+    [SerializeField] private Vector3 startPoint = new Vector3(0, 0, -4);
+    [SerializeField] private int smallBallCount = 7;
+
     #endregion
     
     void Start()
@@ -46,14 +50,15 @@ public class SmallBallManager : MonoBehaviour
 
     private void CreateSmallBalls()
     {
-        for (int i = 0; i < smallBallPositions.Count; i++)
+        for (int i = 0; i < smallBallCount; i++)
         {
             smallBall = Instantiate(smallBallPrefab, transform);
-            smallBall.transform.localPosition = smallBallPositions[i];
+            smallBall.transform.localPosition = startPoint;
             smallBallController = smallBall.GetComponent<SmallBallController>();
             AddToSmallBallList(smallBallController);
         }
-
+        
+        SortTheBalls();
         SetSmallBall();
     }
 
@@ -68,11 +73,26 @@ public class SmallBallManager : MonoBehaviour
 
     private void SortTheBalls()
     {
-        for (int i = 0; i < smallBalls.Count; i++)
+        var count = FindTheLessCount();
+        
+        for (int i = 0; i < count; i++)
         {
             smallBalls[i].transform.localPosition = smallBallPositions[i];
         }
         
+    }
+
+    private int FindTheLessCount()
+    {
+        var count = 0;
+        count = smallBallPositions.Count < smallBalls.Count ? smallBallPositions.Count : smallBalls.Count;
+
+        return count;
+    }
+
+    public void SetSmallBallCount(int ball)
+    {
+        smallBallCount = ball;
     }
 
     #region Add/Remove List

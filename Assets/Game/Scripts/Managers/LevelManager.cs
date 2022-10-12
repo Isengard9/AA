@@ -14,7 +14,7 @@ namespace UnityTemplateProjects.Managers
         {
             int index = PlayerPrefs.GetInt("LevelId", 0);
             BigBallController.instance.SetLevel(levels[index].BigBallModifiers);
-            
+            SmallBallManager.instance.SetSmallBallCount(levels[index].smallBallCount);
         }
     }
 }

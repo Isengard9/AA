@@ -17,5 +17,5 @@ MonoBehaviour:
     time: 1
   - speed: -1
     time: 1
-  smallBallCount: 6
+  smallBallCount: 7
   connectedSmallBallCount: 6
